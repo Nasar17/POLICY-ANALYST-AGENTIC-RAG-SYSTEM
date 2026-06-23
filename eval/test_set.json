@@ -1,0 +1,142 @@
+[
+  {
+    "id": "S01",
+    "type": "single",
+    "question": "What is the definition of a 'public record' under Florida law?",
+    "ground_truth": "Under Florida Statute 119.011(12), 'public records' means all documents, papers, letters, maps, books, tapes, photographs, films, sound recordings, data processing software, or other material, regardless of the physical form, characteristics, or means of transmission, made or received pursuant to law or ordinance or in connection with the transaction of official business by any agency.",
+    "expected_sections": ["119.011"]
+  },
+  {
+    "id": "S02",
+    "type": "single",
+    "question": "What is the right of a person to inspect and copy public records in Florida?",
+    "ground_truth": "Under Florida Statute 119.07(1)(a), every person who has custody of a public record shall permit the record to be inspected and copied by any person desiring to do so, at any reasonable time, under reasonable conditions, and under supervision by the custodian of the public record or the custodian's designee.",
+    "expected_sections": ["119.07"]
+  },
+  {
+    "id": "S03",
+    "type": "single",
+    "question": "What penalties apply to a public officer who knowingly violates the public records inspection statute?",
+    "ground_truth": "Under Florida Statute 119.10(1)(b), a public officer who knowingly violates the provisions of section 119.07(1) is subject to suspension and removal or impeachment and, in addition, commits a misdemeanor of the first degree, punishable as provided in sections 775.082 or 775.083.",
+    "expected_sections": ["119.10"]
+  },
+  {
+    "id": "S04",
+    "type": "single",
+    "question": "What are the custodial requirements for maintaining public records in Florida?",
+    "ground_truth": "Under Florida Statute 119.021, public records shall be maintained and preserved as follows: all public records should be kept in the buildings in which they are ordinarily used; custodians of vital, permanent, or archival records shall keep them in fireproof and waterproof safes, vaults, or rooms; and record books should be copied or repaired if worn or damaged. The Division of Library and Information Services shall adopt rules to establish retention schedules and a disposal process.",
+    "expected_sections": ["119.021"]
+  },
+  {
+    "id": "S05",
+    "type": "single",
+    "question": "Can a contractor performing services for a public agency be required to comply with public records obligations?",
+    "ground_truth": "Yes. Under Florida Statute 119.0701, each public agency contract for services must include a provision requiring the contractor to comply with public records laws, including keeping and maintaining public records, providing copies upon request, ensuring exempt records are not improperly disclosed, and transferring all public records to the agency upon completion of the contract.",
+    "expected_sections": ["119.0701"]
+  },
+  {
+    "id": "S06",
+    "type": "single",
+    "question": "What are the public records exemptions that protect trade secrets held by an agency?",
+    "ground_truth": "Under Florida Statute 119.0715, a trade secret held by an agency is confidential and exempt from the public records inspection requirement of section 119.07(1) and section 24(a) of Article I of the State Constitution. A trade secret has the same meaning as in section 688.002.",
+    "expected_sections": ["119.0715"]
+  },
+  {
+    "id": "S07",
+    "type": "single",
+    "question": "How does Florida law protect victims of crimes or accidents in public records disclosures?",
+    "ground_truth": "Under Florida Statute 119.105, police reports are public records, but every person is afforded a right of privacy in information contained in reports that reveals the victim's home or employment address, and telephone numbers. Additionally, sections of Chapter 119 protect names and identifying information of victims of certain crimes.",
+    "expected_sections": ["119.105", "119.071"]
+  },
+  {
+    "id": "S08",
+    "type": "single",
+    "question": "What attorney fee provisions apply when an agency unlawfully refuses to provide public records?",
+    "ground_truth": "Under Florida Statute 119.12(1), if a civil action is filed against an agency to enforce the provisions of Chapter 119, the court shall assess and award reasonable costs of enforcement, including reasonable attorney fees, against the agency if the court determines the agency unlawfully refused to permit a public record to be inspected or copied and the complainant provided at least 5 business days' written notice to the agency's custodian before filing.",
+    "expected_sections": ["119.12"]
+  },
+  {
+    "id": "S09",
+    "type": "single",
+    "question": "What exemptions protect criminal intelligence and criminal investigative information from public disclosure?",
+    "ground_truth": "Under Florida Statute 119.071(2)(c), active criminal intelligence information and active criminal investigative information are exempt from public records requirements. Information is 'active' while it is related to an ongoing investigation and disclosure would impede the investigation. Information remains active while the prosecution of the case is ongoing.",
+    "expected_sections": ["119.071"]
+  },
+  {
+    "id": "S10",
+    "type": "single",
+    "question": "What does Florida's Open Government Sunset Review Act require for public records exemptions?",
+    "ground_truth": "Under Florida Statute 119.15, the Open Government Sunset Review Act requires that all public records exemptions be reviewed by the Legislature every 5 years and must be affirmatively reenacted or they expire. The Legislature must determine whether the exemption is still necessary and whether the harm from disclosure still outweighs the public interest in access.",
+    "expected_sections": ["119.15"]
+  },
+  {
+    "id": "M01",
+    "type": "multi_part",
+    "question": "What are the public records exemptions for law enforcement records, and what penalties apply if an agency violates Chapter 119?",
+    "ground_truth": "Law enforcement exemptions include active criminal intelligence and investigative information (119.071(2)(c)), surveillance techniques (119.071(2)(d)), geolocation information (119.071(2)(e)), and identity of confidential informants (119.071(2)(f)). Penalties include: a noncriminal infraction with a fine up to $500 for any violation (119.10(1)(a)), misdemeanor of the first degree for knowingly violating 119.07(1) (119.10(1)(b)), and misdemeanor for willful violation by any person (119.10(2)(a)).",
+    "expected_sections": ["119.071", "119.10"]
+  },
+  {
+    "id": "M02",
+    "type": "multi_part",
+    "question": "What are a contractor's public records obligations under Florida law, and what civil action can a requester take if the contractor fails to comply?",
+    "ground_truth": "Contractors must keep and maintain public records required by the agency, provide copies upon request within a reasonable time, ensure exempt records are not improperly disclosed, and transfer records to the agency upon contract completion (119.0701(2)(b)). If a contractor fails to comply, a civil action may be filed to compel production, and if the court finds the contractor unlawfully refused to comply, it shall award reasonable costs and attorney fees against the contractor (119.0701(4)).",
+    "expected_sections": ["119.0701"]
+  },
+  {
+    "id": "M03",
+    "type": "multi_part",
+    "question": "What is the definition of a 'public record' under Chapter 119, and who qualifies as an 'agency' required to provide access?",
+    "ground_truth": "A public record under 119.011(12) includes all documents, papers, letters, maps, tapes, photographs, data processing software, or other material made or received in connection with official agency business. An 'agency' under 119.011(2) means any state, county, district, authority, or municipal officer, department, division, board, bureau, commission, or other separate unit of government created or established by law.",
+    "expected_sections": ["119.011"]
+  },
+  {
+    "id": "M04",
+    "type": "multi_part",
+    "question": "What cybersecurity information is protected from public disclosure, and under what conditions can such information be released?",
+    "ground_truth": "Under Florida Statute 119.0725, cybersecurity information held by an agency, including information about vulnerabilities, security measures, and breach investigations, is exempt from public records requirements. The exemption applies to information that if disclosed could facilitate an attack on the agency's information technology systems. Agencies may share such information with law enforcement and certain authorized parties.",
+    "expected_sections": ["119.0725"]
+  },
+  {
+    "id": "M05",
+    "type": "multi_part",
+    "question": "What are the accelerated hearing provisions for public records enforcement, and what remedies can a court award?",
+    "ground_truth": "Under Florida Statute 119.11, whenever an action is filed to enforce Chapter 119, the court shall set an immediate hearing and shall give the case priority over other pending cases. The court can order immediate compliance with the public records law. Attorney fees and costs may be awarded to the prevailing party under section 119.12.",
+    "expected_sections": ["119.11", "119.12"]
+  },
+  {
+    "id": "U01",
+    "type": "unanswerable",
+    "question": "What are the requirements for renewing a Florida driver's license?",
+    "ground_truth": "Not found in Chapter 119 (Public Records). Driver's license renewal is governed by a different chapter of Florida Statutes.",
+    "expected_sections": []
+  },
+  {
+    "id": "U02",
+    "type": "unanswerable",
+    "question": "What are the penalties for speeding on Florida highways?",
+    "ground_truth": "Not found in Chapter 119 (Public Records). Traffic violations are governed by a different chapter of Florida Statutes.",
+    "expected_sections": []
+  },
+  {
+    "id": "U03",
+    "type": "unanswerable",
+    "question": "How does Florida handle workers' compensation claims for state employees?",
+    "ground_truth": "Not found in Chapter 119 (Public Records). Workers' compensation is governed by a different chapter of Florida Statutes.",
+    "expected_sections": []
+  },
+  {
+    "id": "U04",
+    "type": "unanswerable",
+    "question": "What permits are required to open a restaurant in Florida?",
+    "ground_truth": "Not found in Chapter 119 (Public Records). Restaurant permitting is governed by a different chapter of Florida Statutes.",
+    "expected_sections": []
+  },
+  {
+    "id": "U05",
+    "type": "unanswerable",
+    "question": "What are Florida's requirements for filing a small claims court case?",
+    "ground_truth": "Not found in Chapter 119 (Public Records). Small claims court procedure is governed by Florida Rules of Civil Procedure, not Chapter 119.",
+    "expected_sections": []
+  }
+]

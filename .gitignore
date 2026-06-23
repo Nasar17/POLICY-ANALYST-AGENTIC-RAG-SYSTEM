@@ -1,0 +1,24 @@
+# Secrets and local environment
+.env
+.streamlit/secrets.toml
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Eval artifacts (checkpoint + results — regenerate with eval/run_eval.py)
+eval/results/
+
+# Raw HTML source (regenerate with ingest/fetch.py)
+data/raw/
+
+# Streamlit dev logs
+app/st_out.txt
+app/st_err.txt
+
+# IDE
+.idea/
+.vscode/

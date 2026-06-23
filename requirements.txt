@@ -1,0 +1,29 @@
+# Florida Statute Research Assistant — dependencies
+# Tested on Python 3.10; compatible with 3.10–3.12.
+
+# Embedding + reranking (models download from HuggingFace on first run)
+sentence-transformers>=3.0,<6.0
+
+# Vector store
+chromadb>=1.5,<2.0
+
+# BM25 keyword retrieval
+rank-bm25>=0.2.2
+
+# Groq LLM API
+groq>=0.37
+
+# Agentic loop
+langgraph>=1.2
+langchain-core>=1.0
+
+# API layer
+fastapi>=0.110
+uvicorn[standard]>=0.29
+
+# Streamlit UI
+streamlit>=1.35
+
+# Utilities
+numpy>=1.26,<3.0
+python-dotenv>=1.0

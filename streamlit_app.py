@@ -49,7 +49,14 @@ st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
 <style>
-html, body, [class*="st-"], .stMarkdown, .stText, button, input, textarea, select {
+html, body,
+.stMarkdown,
+[data-testid="stMarkdownContainer"],
+[data-testid="stChatMessageContent"],
+[data-testid="stWidgetLabel"],
+.stChatInput textarea,
+input[type="text"],
+.stButton > button > div > p {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 

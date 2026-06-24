@@ -22,6 +22,10 @@ import streamlit as st
 if "GROQ_API_KEY" not in os.environ and "GROQ_API_KEY" in st.secrets:
     os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
+# Temporary debug — remove after confirming key works
+_key = os.environ.get("GROQ_API_KEY", "NOT SET")
+st.sidebar.caption(f"Key loaded: `{_key[:12]}...{_key[-4:]}`")
+
 # Ensure project root is on sys.path when run from the app/ subdirectory
 ROOT = Path(__file__).parent
 if str(ROOT) not in sys.path:

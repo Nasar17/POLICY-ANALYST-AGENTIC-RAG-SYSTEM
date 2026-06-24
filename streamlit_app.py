@@ -28,10 +28,8 @@ st.set_page_config(
 # Inject Streamlit Cloud secrets into os.environ before any module reads them
 try:
     os.environ["GROQ_API_KEY"] = str(st.secrets["GROQ_API_KEY"]).strip()
-    _k = os.environ["GROQ_API_KEY"]
-    st.sidebar.caption(f"Key loaded: `{_k[:6]}…{_k[-4:]}` ({len(_k)} chars)")
 except KeyError:
-    st.sidebar.error("GROQ_API_KEY not found in secrets")
+    pass  # local: key comes from .env file
 
 # Ensure project root is on sys.path when run from the app/ subdirectory
 ROOT = Path(__file__).parent

@@ -19,8 +19,10 @@ from pathlib import Path
 import streamlit as st
 
 # Inject Streamlit Cloud secrets into os.environ before any module reads them
-if "GROQ_API_KEY" not in os.environ and "GROQ_API_KEY" in st.secrets:
+try:
     os.environ["GROQ_API_KEY"] = str(st.secrets["GROQ_API_KEY"]).strip()
+except KeyError:
+    pass  # local: key comes from .env file
 
 # Ensure project root is on sys.path when run from the app/ subdirectory
 ROOT = Path(__file__).parent

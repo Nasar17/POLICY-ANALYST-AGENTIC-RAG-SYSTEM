@@ -18,14 +18,18 @@ from pathlib import Path
 
 import streamlit as st
 
+st.set_page_config(
+    page_title="Florida Statute Research Assistant",
+    page_icon="⚖️",
+    layout="centered",
+    initial_sidebar_state="expanded",
+)
+
 # Inject Streamlit Cloud secrets into os.environ before any module reads them
 try:
     os.environ["GROQ_API_KEY"] = str(st.secrets["GROQ_API_KEY"]).strip()
 except KeyError:
     pass  # local: key comes from .env file
-
-_key = os.environ.get("GROQ_API_KEY", "NOT SET")
-st.sidebar.caption(f"Key: `{_key[:8]}...{_key[-4:]}` · {len(_key)} chars")
 
 # Ensure project root is on sys.path when run from the app/ subdirectory
 ROOT = Path(__file__).parent
@@ -77,16 +81,6 @@ def dedup_sources(chunks) -> list[dict]:
 
 def set_example(text: str) -> None:
     st.session_state["question_input"] = text
-
-
-# ── Page config ───────────────────────────────────────────────────────────────
-
-st.set_page_config(
-    page_title="Florida Statute Research Assistant",
-    page_icon="⚖️",
-    layout="centered",
-    initial_sidebar_state="expanded",
-)
 
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────

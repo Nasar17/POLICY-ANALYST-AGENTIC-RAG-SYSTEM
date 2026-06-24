@@ -11,16 +11,21 @@ Deploy:
 Or on Streamlit Community Cloud, set Main file path to: app/streamlit_app.py
 """
 
+import os
 import sys
 import time
 from pathlib import Path
 
+import streamlit as st
+
+# Inject Streamlit Cloud secrets into os.environ before any module reads them
+if "GROQ_API_KEY" not in os.environ and "GROQ_API_KEY" in st.secrets:
+    os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+
 # Ensure project root is on sys.path when run from the app/ subdirectory
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-
-import streamlit as st
 
 from retrieval.retriever import HybridRetriever
 from agent.graph import AgenticRAG

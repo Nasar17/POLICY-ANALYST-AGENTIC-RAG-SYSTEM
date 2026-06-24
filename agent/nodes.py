@@ -126,11 +126,14 @@ def analyze(state: AgentState) -> dict:
 def make_retrieve(retriever: HybridRetriever):
     """
     Return a retrieve node closed over the shared HybridRetriever instance.
-    Runs TOP_K_PER_SUBQ searches (one per sub-question), pools and deduplicates.
+    Accumulates chunks across retries — existing chunks are preserved so that
+    a worse rewrite round never loses evidence from a better earlier round.
     """
     def retrieve(state: AgentState) -> dict:
-        seen_ids: set[str] = set()
-        pooled: list[Chunk] = []
+        # Seed with chunks already in state (empty on first pass)
+        existing = {c.id: c for c in state.get("all_chunks", [])}
+        seen_ids: set[str] = set(existing.keys())
+        pooled: list[Chunk] = list(existing.values())
 
         for sub_q in state["sub_questions"]:
             chunks = retriever.retrieve(
@@ -195,29 +198,32 @@ def grade(state: AgentState) -> dict:
 # ── rewrite ───────────────────────────────────────────────────────────────────
 
 _REWRITE_SYSTEM = """\
-You are a query-rewriting assistant for a Florida statute research system.
+You are a query-rewriting assistant for a Florida statute research system (Chapter 119, Public Records Act).
 
-The previous retrieval attempt returned chunks that were not sufficient to answer
-the question.  Generate improved search queries.
+The previous retrieval was graded insufficient. You will be given:
+- The original question
+- Queries already tried (do NOT simply rephrase these)
+- The statute sections already retrieved (do NOT target these again)
+- What the grader says is missing
 
-Strategies:
-- Use different terminology or synonyms found in statutes
-- Focus on a specific sub-aspect that might be in a different section
-- Broaden or narrow the scope
+Your job: write 1–3 SHORT search queries that target the MISSING information.
+Each query must be meaningfully different from every query already tried.
+Stay within Florida Statute Chapter 119. Use plain natural language, not legalese.
 
 Respond ONLY with valid JSON:
 {
-  "rewritten_queries": ["improved query 1", ...],
-  "strategy": "one sentence"
+  "rewritten_queries": ["query 1", ...],
+  "missing_info": "one sentence describing what is being targeted"
 }"""
 
 
 def rewrite(state: AgentState) -> dict:
+    found_sections = sorted({c.meta["section_num"] for c in state["all_chunks"]})
     user = (
         f"Original question: {state['question']}\n"
-        f"Queries tried so far: {state['searched_queries']}\n"
-        f"Grade reasoning: {state['grade_reasoning']}\n"
-        f"Retry number: {state['retry_count'] + 1}"
+        f"Queries already tried: {state['searched_queries']}\n"
+        f"Statute sections already retrieved: {found_sections}\n"
+        f"What the grader says is missing: {state['grade_reasoning']}\n"
     )
     raw = _call(_REWRITE_SYSTEM, user)
     try:
@@ -226,13 +232,11 @@ def rewrite(state: AgentState) -> dict:
     except (json.JSONDecodeError, KeyError):
         new_qs = state["sub_questions"]
 
-    updated_searched = state["searched_queries"] + new_qs
-
     return {
         "sub_questions":    new_qs,
         "retry_count":      state["retry_count"] + 1,
-        "searched_queries": updated_searched,
-        "all_chunks":       [],   # clear for fresh retrieval
+        "searched_queries": state["searched_queries"] + new_qs,
+        # all_chunks intentionally NOT cleared — retrieve accumulates on top
         "grade":            "",
         "grade_reasoning":  "",
     }
@@ -296,7 +300,7 @@ def abstain(state: AgentState) -> dict:
 
 # ── routing ───────────────────────────────────────────────────────────────────
 
-MAX_RETRIES = 2
+MAX_RETRIES = 1
 
 
 def route_after_grade(state: AgentState) -> str:

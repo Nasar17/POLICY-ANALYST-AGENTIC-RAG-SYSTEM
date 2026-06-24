@@ -26,6 +26,10 @@ try:
 except KeyError:
     pass  # local: key comes from .env file
 
+if not os.environ.get("GROQ_API_KEY"):
+    st.error("GROQ_API_KEY is not set. Add it to Streamlit secrets or a local .env file.")
+    st.stop()
+
 ROOT = Path(__file__).parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
@@ -353,6 +357,9 @@ prefill = st.session_state.pop("_prefill", None)
 prompt  = st.chat_input("Ask about Florida's public records law…") or prefill
 
 if prompt:
+    if len(prompt) > 1000:
+        st.error("Question is too long (max 1 000 characters). Please be more concise.")
+        st.stop()
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)

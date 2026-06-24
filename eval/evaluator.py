@@ -30,7 +30,7 @@ load_dotenv(Path(__file__).parent.parent / ".env")
 MODEL = "llama-3.1-8b-instant"
 DELAY_BETWEEN_CALLS = 5.0   # seconds between judge calls
 MAX_RETRIES = 6             # retry up to 6× on 429 (waits 10, 20, 40, 80, 160, 320s)
-CTX_CHARS   = 300           # chars of each context shown to the judge (keeps tokens low)
+CTX_CHARS   = 800           # chars of each context shown to the judge
 
 _client: Groq | None = None
 _embedder: SentenceTransformer | None = None

@@ -24,6 +24,9 @@ try:
 except KeyError:
     pass  # local: key comes from .env file
 
+_key = os.environ.get("GROQ_API_KEY", "NOT SET")
+st.sidebar.caption(f"Key: `{_key[:8]}...{_key[-4:]}` · {len(_key)} chars")
+
 # Ensure project root is on sys.path when run from the app/ subdirectory
 ROOT = Path(__file__).parent
 if str(ROOT) not in sys.path:
